@@ -84,7 +84,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 
 	/*.crm_prd_info*/
 	SET @start_time = GETDATE();
-	PRINT '** Tuncating Table silver.crm_cust_info';
+	PRINT '** Tuncating Table silver.crm_prd_info';
 	TRUNCATE TABLE silver.crm_prd_info;
 
 
@@ -125,8 +125,8 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 
 	   /*.crm_sales_details*/
 	   SET @start_time = GETDATE();
-	   PRINT '** Tuncating Table silver.crm_cust_info';
-	TRUNCATE TABLE silver.crm_cust_info;
+	   PRINT '** Tuncating Table silver.crm_sales_details';
+	TRUNCATE TABLE silver.crm_sales_details;
 
 
 	   INSERT INTO silver.crm_sales_details(
@@ -182,8 +182,8 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 
 	/*erp_cust_az12*/
 	SET @start_time = GETDATE();
-	PRINT '** Tuncating Table silver.crm_cust_info';
-	TRUNCATE TABLE silver.crm_cust_info;
+	PRINT '** Tuncatingsilver.erp_cust_az12';
+	TRUNCATE TABLE silver.erp_cust_az12;
 
 
 	INSERT INTO silver.erp_cust_az12(
@@ -214,7 +214,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 	/* .erp_loc_a101*/
 	SET @start_time = GETDATE();
 	PRINT '** Tuncating Table silver.crm_cust_info';
-	TRUNCATE TABLE silver.crm_cust_info;
+	TRUNCATE TABLE silver.erp_loc_a101;
 
 	INSERT INTO silver.erp_loc_a101(
 	cid,
@@ -237,8 +237,8 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 
 	/* .erp_px_cat_g1v2*/
 	SET @start_time = GETDATE();
-	PRINT '** Tuncating Table silver.crm_cust_info';
-	TRUNCATE TABLE silver.crm_cust_info;
+	PRINT '** Tuncating Table silver.erp_px_cat_g1v2 ';
+	TRUNCATE TABLE silver.erp_px_cat_g1v2 ;
 
 	INSERT INTO silver.erp_px_cat_g1v2(id,
 	cat,
