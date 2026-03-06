@@ -85,7 +85,7 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 	/*.crm_prd_info*/
 	SET @start_time = GETDATE();
 	PRINT '** Tuncating Table silver.crm_cust_info';
-	TRUNCATE TABLE silver.crm_cust_info;
+	TRUNCATE TABLE silver.crm_prd_info;
 
 
 	INSERT INTO silver.crm_prd_info(
