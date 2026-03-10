@@ -601,7 +601,7 @@ SELECT
 
 /*I started explanatory analysis after finalising the gold layer and the distinct country value indicated hidden spaces after some country names 
 So I had to run a few checks to end up inserting the following 
-WHEN UPPER(TRIM(cntry)) LIKE 'United%' THEN 'United States'
+WHEN UPPER(TRIM(cntry)) LIKE 'United St%' THEN 'United States'
 WHEN UPPER(TRIM(cntry)) LIKE 'Germany%' THEN 'Germany'
 
 The check to see where the hidden spaces are 
