@@ -599,6 +599,20 @@ SELECT
 	FROM 
 	bronze.erp_loc_a101;
 
+/*I started explanatory analysis after finalising the gold layer and the distinct country value indicated hidden spaces after some country names 
+So I had to run a few checks to end up inserting the following 
+WHEN UPPER(TRIM(cntry)) LIKE 'United%' THEN 'United States'
+WHEN UPPER(TRIM(cntry)) LIKE 'Germany%' THEN 'Germany'
+
+The check to see where the hidden spaces are 
+SELECT DISTINCT '['+cntry +']' as visibility_check,
+LEN(cntry) as actual_lenght
+FROM silver.erp_loc_a101
+WHERE cntry like 'United%'
+--I just used all of the country names that came up as duplicates
+-- I have updated the main script for loading the table 
+*/
+
 	/***********************************************************************************
 	************************************************************************
 	*/
