@@ -224,6 +224,8 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 
 	CASE WHEN UPPER(cntry) LIKE 'DE%' THEN 'Germany'
 		WHEN UPPER(cntry) LIKE 'US%' THEN 'United States'
+		WHEN UPPER(TRIM(cntry)) LIKE 'United%' THEN 'United States'
+		WHEN UPPER(TRIM(cntry)) LIKE 'Germany%' THEN 'Germany'
 		WHEN LEN(TRIM(cntry)) <2 OR cntry IS NULL THEN 'n/a'
 		else trim (cntry)
 		END AS cntry
