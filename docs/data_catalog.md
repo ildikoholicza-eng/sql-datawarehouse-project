@@ -23,7 +23,7 @@ Data Dictionary for Gold Layer
 
 
 ### 2. gold.dim_products
-### ** Purpose: ** Provide informationabout the products and their attributes.
+### **Purpose** Provide informationabout the products and their attributes.
 ### **Columns**
 | Column Name | Data Type | Description |
 | :--- | :--- | :--- |
@@ -41,8 +41,8 @@ Data Dictionary for Gold Layer
 
 
 ### 3. gold.fact_sales
-#### **Purpose:** Stores transactional data for analytical purposes.
-#### ** Columns:**
+### **Purpose** Stores transactional data for analytical purposes.
+### **Columns**
 | Column Name | Data Type | Description |
 | :--- | :--- | :--- |
 | **order_number** | NVARCHAR(50) | A unique alphanumerical identifier for each sales order (e.g., 'SO544596'). |
