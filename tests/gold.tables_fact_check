@@ -1,1 +1,100 @@
 
+ --Test if we have duplicates after joining tables 
+
+
+ Select cst_id, Count(*) from 
+ ( SELECT 
+			ci.cst_id,
+			ci.cst_key,
+			ci.cst_firstname, 
+			ci.cst_lastname,
+			ci.cst_marital_status,
+			ci.cst_gndr,
+			ci.cst_create_date,
+			ca.bdate,
+			ca.gen,
+			la.cntry
+			
+		FROM silver.crm_cust_info ci
+		LEFT JOIN silver.erp_cust_az12 ca
+		ON			ci.cst_key = ca.cid 
+
+		LEFT JOIN silver.erp_loc_a101 la 
+		 ON			ci.cst_key = la.cid 
+
+		 )t Group By cst_id
+ Having count(*)>1
+
+ -- Query the duplicate columns 
+
+  SELECT 
+		ci.cst_gndr,
+		ca.gen,	
+		CASE WHEN
+		      ci.cst_gndr != 'n/a' THEN ci.cst_gndr 
+			 ELSE COALESCE(ca.gen, 'n/a')
+			 END as new_gen
+
+		FROM silver.crm_cust_info ci
+		LEFT JOIN silver.erp_cust_az12 ca
+		ON			ci.cst_key = ca.cid 
+
+		LEFT JOIN silver.erp_loc_a101 la 
+		 ON			ci.cst_key = la.cid 
+	
+		 -- you see all the scenarios , order by sorts the data by something
+
+
+		 -- Chek if everything is in the right place
+		 SELECT*
+		 FROM gold.dim_customers
+
+		SELECT DISTINCT gender
+		FROM gold.dim_customers
+
+		-- test if primary key is unique
+SELECT prd_key, count(*) from (
+SELECT 
+
+	pn.prd_id,
+	pn.prd_key ,
+	pn.prd_nm ,
+	pn.cat_id ,
+	pc.cat,
+	pc.subcat ,
+	pn.prd_cost ,
+	pc. maintenance,
+	pn.prd_line, 
+	pn.prd_start_dt	
+FROM silver.crm_prd_info pn
+LEFT JOIN
+silver.erp_px_cat_g1v2 pc
+ON pn.cat_id = pc.id
+WHERE prd_end_dt IS NULL --filter out historical data 
+)t GROUP BY prd_key
+HAVING COUNT(*) > 1
+
+SELECT *
+FROM
+gold.dim_products
+
+
+--Foreign key integrity
+
+SELECT*
+from 
+gold.fact_sales f
+left join gold.dim_customers c
+on c.customer_key = f.customer_key
+WHERE c.customer_key is null  -- no matching  expect noresult
+
+--same with the products
+
+SELECT*
+from 
+gold.fact_sales f
+left join gold.dim_customers c
+on c.customer_key = f.customer_key
+left join gold.dim_products p
+on p.product_key = f.product_key 
+WHERE p.product_key is null  
