@@ -1,5 +1,20 @@
+/*
+===================================================================================================================
+Quality Checks
+===================================================================================================================
+This script performs quality checks to validate the integrity, consistency, and accuracy of the Gold Layer.
+	These checks ensure:
+	- Uniqueness of the surrogate keys in dimension tables.
+	- Referential integrity between fact and dimension tables.
+	- Validation of relationships in the data model for analytical purposes.
 
- --Test if we have duplicates after joining tables 
+Usage note:
+	- Run these scripts after  data loading Silver Layer
+	- Investigate and resolve any discrepencies founf during checks.
+====================================================================================================================================
+====================================================================================================================================
+*/
+ --Check for uniqueness of Customer Key. Test if we have duplicates after joining tables. Expecting no result
 
 
  Select cst_id, Count(*) from 
