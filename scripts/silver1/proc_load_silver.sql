@@ -216,26 +216,17 @@ CREATE OR ALTER PROCEDURE silver.load_silver AS BEGIN
 	PRINT '** Tuncating Table silver.crm_cust_info';
 	TRUNCATE TABLE silver.erp_loc_a101;
 
-		INSERT INTO silver.erp_loc_a101(
+	INSERT INTO silver.erp_loc_a101(
 	cid,
 	cntry)
 
 SELECT DISTINCT 
     REPLACE(cid, '-', '') AS cid,
     CASE 
-        -- If it starts with 'DE' or 'Ger', it's Germany. Period.
         WHEN UPPER(cntry) LIKE 'DE%' OR UPPER(cntry) LIKE 'Ger%' THEN 'Germany'
-        
-        -- If it starts with 'US' or 'Uni', it's United States.
-        WHEN UPPER(cntry) LIKE 'US%' OR UPPER(cntry) LIKE 'Uni%' THEN 'United States'
-        
-        -- If it starts with 'FR', it's France.
+        WHEN UPPER(cntry) LIKE 'US%' OR UPPER(cntry) LIKE 'United S%' THEN 'United States'
         WHEN UPPER(cntry) LIKE 'FR%' THEN 'France'
-        
-        -- If it's too short, call it n/a
         WHEN LEN(TRIM(cntry)) < 2 OR cntry IS NULL THEN 'n/a'
-        
-        -- Otherwise, just clean the edges
         ELSE TRIM(cntry)
     END AS cntry
 FROM bronze.erp_loc_a101;
